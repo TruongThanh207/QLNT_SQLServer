@@ -67,4 +67,72 @@ public class RoomsDAL {
         }
         return count;
     }
+
+    public boolean AddRoom(String name, int price) {
+        int id;
+        int idroom = GetMaxIndexRooms();
+        if(idroom<0)
+        {
+            id = 1;
+        }
+        else{
+            id = idroom+1;
+        }
+        if(FindRoom(name))
+        {
+            return false;
+        }
+        
+        String sql = "Insert into Rooms (ID,TENPHONG,SO_NGUOI_HIEN_CO,GIAPHONG,CHISODIEN_OLD, CHISODIEN_NEW, CHISONUOC_OLD, CHISONUOC_NEW)"
+                + "values('"+id+"','"+name+"','"+0+"' ,'"+price+"','"+0+"','"+0+"','"+0+"','"+0+"')";
+        try
+        {
+            Statement st = da.getConn().createStatement();
+            st.executeUpdate(sql);
+            return true;
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();  
+        }
+        return false;
+    }
+    public int GetMaxIndexRooms()
+    {
+        String sql = "Select MAX(id) from Rooms";
+        try
+        {
+            Statement st = da.getConn().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next())
+            {
+                return rs.getInt(1);
+            }
+            return -1;
+           
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();  
+        }
+        return -1;
+    }
+    public boolean FindRoom(String name)
+    {
+        String sql = "SELECT count(*) FROM rooms where TENPHONG='"+name+"'";
+        try
+        {
+            Statement st = da.getConn().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next())
+            {
+                return true;
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();  
+        }
+        return false;
+    }
 }

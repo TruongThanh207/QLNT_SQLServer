@@ -60,6 +60,8 @@ public class TrangChu extends javax.swing.JFrame {
         jRoom = new javax.swing.JLabel();
         jpanelGuest = new javax.swing.JPanel();
         jGuest = new javax.swing.JLabel();
+        pnthanhtoanhoadon = new javax.swing.JPanel();
+        JHoadon = new javax.swing.JLabel();
         jpanelQLNV = new javax.swing.JPanel();
         jUser = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -78,7 +80,7 @@ public class TrangChu extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
-        jhome.setBackground(new java.awt.Color(255, 0, 0));
+        jhome.setBackground(new java.awt.Color(255, 153, 0));
         jhome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jhomeMouseClicked(evt);
@@ -186,6 +188,28 @@ public class TrangChu extends javax.swing.JFrame {
             .addComponent(jGuest, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
+        pnthanhtoanhoadon.setBackground(new java.awt.Color(0, 153, 153));
+
+        JHoadon.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        JHoadon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JHoadon.setText("Thanh Toán Hóa Đơn");
+        JHoadon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JHoadonMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnthanhtoanhoadonLayout = new javax.swing.GroupLayout(pnthanhtoanhoadon);
+        pnthanhtoanhoadon.setLayout(pnthanhtoanhoadonLayout);
+        pnthanhtoanhoadonLayout.setHorizontalGroup(
+            pnthanhtoanhoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(JHoadon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        pnthanhtoanhoadonLayout.setVerticalGroup(
+            pnthanhtoanhoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(JHoadon, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+        );
+
         jpanelQLNV.setBackground(new java.awt.Color(0, 153, 153));
 
         jUser.setBackground(new java.awt.Color(255, 255, 255));
@@ -207,7 +231,7 @@ public class TrangChu extends javax.swing.JFrame {
         );
         jpanelQLNVLayout.setVerticalGroup(
             jpanelQLNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jUser, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+            .addComponent(jUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -218,7 +242,8 @@ public class TrangChu extends javax.swing.JFrame {
             .addComponent(jpanelInfor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jpanelRoom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jpanelGuest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jpanelQLNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnthanhtoanhoadon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpanelQLNV, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,8 +256,10 @@ public class TrangChu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpanelGuest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnthanhtoanhoadon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpanelQLNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 129, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 0));
@@ -245,7 +272,7 @@ public class TrangChu extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 597, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -259,8 +286,8 @@ public class TrangChu extends javax.swing.JFrame {
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -287,11 +314,13 @@ public class TrangChu extends javax.swing.JFrame {
         jUser.setForeground(Color.BLACK);
         jInfor.setForeground(Color.BLACK);
         jGuest.setForeground(Color.BLACK);
-        jRoom.setForeground(Color.BLACK); 
+        jRoom.setForeground(Color.BLACK);
+         JHoadon.setForeground(Color.BLACK);
         jpanelQLNV.setBackground(new Color(0,153,153));
         jpanelGuest.setBackground(new Color(0,153,153));
         jpanelInfor.setBackground(new Color(0,153,153));
         jpanelRoom.setBackground(new Color(0,153,153));
+        pnthanhtoanhoadon.setBackground(new Color(0,153,153));
     }//GEN-LAST:event_jhomeMouseClicked
 
     
@@ -306,10 +335,12 @@ public class TrangChu extends javax.swing.JFrame {
          jInfor.setForeground(Color.BLACK);
         jGuest.setForeground(Color.BLACK);
         jRoom.setForeground(Color.BLACK);
+         JHoadon.setForeground(Color.BLACK);
         jpanelQLNV.setBackground(Color.LIGHT_GRAY);
         jpanelGuest.setBackground(new Color(0,153,153));
         jpanelInfor.setBackground(new Color(0,153,153));
         jpanelRoom.setBackground(new Color(0,153,153));
+        pnthanhtoanhoadon.setBackground(new Color(0,153,153));
     }//GEN-LAST:event_jUserMousePressed
 
     private void jInforMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jInforMouseClicked
@@ -328,10 +359,12 @@ public class TrangChu extends javax.swing.JFrame {
         jUser.setForeground(Color.BLACK);
         jGuest.setForeground(Color.BLACK);
         jRoom.setForeground(Color.BLACK);
+         JHoadon.setForeground(Color.BLACK);
         jpanelInfor.setBackground(Color.LIGHT_GRAY);
         jpanelGuest.setBackground(new Color(0,153,153));
         jpanelQLNV.setBackground(new Color(0,153,153));
         jpanelRoom.setBackground(new Color(0,153,153));
+        pnthanhtoanhoadon.setBackground(new Color(0,153,153));
         
         
         
@@ -348,10 +381,12 @@ public class TrangChu extends javax.swing.JFrame {
         jInfor.setForeground(Color.BLACK);
         jGuest.setForeground(Color.BLACK);
         jUser.setForeground(Color.BLACK);
+         JHoadon.setForeground(Color.BLACK);
         jpanelRoom.setBackground(Color.LIGHT_GRAY);
         jpanelGuest.setBackground(new Color(0,153,153));
         jpanelInfor.setBackground(new Color(0,153,153));
         jpanelQLNV.setBackground(new Color(0,153,153));
+        pnthanhtoanhoadon.setBackground(new Color(0,153,153));
     }//GEN-LAST:event_jRoomMouseClicked
 
     private void jGuestMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jGuestMouseClicked
@@ -365,10 +400,12 @@ public class TrangChu extends javax.swing.JFrame {
         jInfor.setForeground(Color.BLACK);
         jUser.setForeground(Color.BLACK);
         jRoom.setForeground(Color.BLACK);
+        JHoadon.setForeground(Color.BLACK);
         jpanelGuest.setBackground(Color.LIGHT_GRAY);
         jpanelQLNV.setBackground(new Color(0,153,153));
         jpanelInfor.setBackground(new Color(0,153,153));
         jpanelRoom.setBackground(new Color(0,153,153));
+        pnthanhtoanhoadon.setBackground(new Color(0,153,153));
     }//GEN-LAST:event_jGuestMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -381,6 +418,25 @@ public class TrangChu extends javax.swing.JFrame {
         }
        
     }//GEN-LAST:event_formWindowClosing
+
+    private void JHoadonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JHoadonMouseClicked
+        // TODO add your handling code here:
+        jPanel2.removeAll();
+        jPanel2.setLayout(new BorderLayout());
+        jPanel2.add(new BillPanel());
+        jPanel2.validate();
+        jPanel2.repaint();
+        JHoadon.setForeground(new Color(255, 255, 230));
+        jGuest.setForeground(Color.BLACK);
+        jInfor.setForeground(Color.BLACK);
+        jUser.setForeground(Color.BLACK);
+        jRoom.setForeground(Color.BLACK);
+        pnthanhtoanhoadon.setBackground(Color.LIGHT_GRAY);
+        jpanelQLNV.setBackground(new Color(0,153,153));
+        jpanelInfor.setBackground(new Color(0,153,153));
+        jpanelRoom.setBackground(new Color(0,153,153));
+        jpanelGuest.setBackground(new Color(0,153,153));
+    }//GEN-LAST:event_JHoadonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -418,6 +474,7 @@ public class TrangChu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel JHoadon;
     private javax.swing.JLabel jGuest;
     private javax.swing.JLabel jInfor;
     private javax.swing.JLabel jLabel1;
@@ -432,6 +489,7 @@ public class TrangChu extends javax.swing.JFrame {
     private javax.swing.JPanel jpanelInfor;
     private javax.swing.JPanel jpanelQLNV;
     private javax.swing.JPanel jpanelRoom;
+    private javax.swing.JPanel pnthanhtoanhoadon;
     // End of variables declaration//GEN-END:variables
 
     
