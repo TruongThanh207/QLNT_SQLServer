@@ -453,7 +453,7 @@ public class RoomPanel extends javax.swing.JPanel {
 
     private void btneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditActionPerformed
         // TODO add your handling code here:
-        if(btnedit.getText().equals("Cancel"))
+        if(btnedit.getText().equals("Hủy"))
         {
              txtnameroom.setEnabled(false);
              txtpriceroom.setEnabled(false);
