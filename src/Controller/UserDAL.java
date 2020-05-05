@@ -202,4 +202,16 @@ public class UserDAL {
          
         return s;
     }
+
+    public boolean RemoveUserByID(int id) {
+        String sql = "Delete users where id = '"+id+"'";
+        try {
+            Statement st = da.getConn().createStatement();
+            st.executeUpdate(sql);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

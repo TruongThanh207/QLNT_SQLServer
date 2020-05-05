@@ -9,6 +9,8 @@ import Controller.UserDAL;
 import Model.User;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
 
 /**
@@ -34,7 +36,71 @@ public class TrangChu extends javax.swing.JFrame {
         setTitle("QUẢN LÝ NHÀ TRỌ");
         if(permissive == 0)
         {
-            jpanelQLNV.setVisible(false);
+            jUser.setEnabled(false);
+            jUser.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền!");
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    
+                }
+
+            });
+        }
+        else{
+            jUser.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    jPanel2.removeAll();
+                    jPanel2.setLayout(new BorderLayout());
+                    jPanel2.add(new QLNhanVien());
+                    jPanel2.validate();
+                    jPanel2.repaint();
+                    jUser.setForeground(new Color(255, 102, 102));
+                    jInfor.setForeground(Color.WHITE);
+                    jGuest.setForeground(Color.WHITE);
+                    jRoom.setForeground(Color.WHITE);
+                    JHoadon.setForeground(Color.WHITE);
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                  
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    
+                }
+            });
         }
         
        
@@ -54,15 +120,10 @@ public class TrangChu extends javax.swing.JFrame {
         jhome = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jpanelInfor = new javax.swing.JPanel();
         jInfor = new javax.swing.JLabel();
-        jpanelRoom = new javax.swing.JPanel();
         jRoom = new javax.swing.JLabel();
-        jpanelGuest = new javax.swing.JPanel();
         jGuest = new javax.swing.JLabel();
-        pnthanhtoanhoadon = new javax.swing.JPanel();
         JHoadon = new javax.swing.JLabel();
-        jpanelQLNV = new javax.swing.JPanel();
         jUser = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
 
@@ -78,7 +139,7 @@ public class TrangChu extends javax.swing.JFrame {
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(128, 0, 128));
 
         jhome.setBackground(new java.awt.Color(255, 153, 0));
         jhome.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -116,151 +177,99 @@ public class TrangChu extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jpanelInfor.setBackground(new java.awt.Color(0, 153, 153));
-
         jInfor.setBackground(new java.awt.Color(255, 255, 255));
         jInfor.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jInfor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jInfor.setForeground(new java.awt.Color(255, 255, 255));
+        jInfor.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jInfor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/baseline_done_all_white_18dp.png"))); // NOI18N
         jInfor.setText("Thông Tin Cá Nhân");
-        jInfor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jInfor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jInfor.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jInfor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jInforMouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout jpanelInforLayout = new javax.swing.GroupLayout(jpanelInfor);
-        jpanelInfor.setLayout(jpanelInforLayout);
-        jpanelInforLayout.setHorizontalGroup(
-            jpanelInforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jInfor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jpanelInforLayout.setVerticalGroup(
-            jpanelInforLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jInfor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-        );
-
-        jpanelRoom.setBackground(new java.awt.Color(0, 153, 153));
-
         jRoom.setBackground(new java.awt.Color(255, 255, 255));
         jRoom.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jRoom.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jRoom.setForeground(new java.awt.Color(255, 255, 255));
+        jRoom.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jRoom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/baseline_done_all_white_18dp.png"))); // NOI18N
         jRoom.setText("Quản Lí Phòng");
-        jRoom.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jRoom.setAlignmentY(0.0F);
+        jRoom.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jRoom.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jRoomMouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout jpanelRoomLayout = new javax.swing.GroupLayout(jpanelRoom);
-        jpanelRoom.setLayout(jpanelRoomLayout);
-        jpanelRoomLayout.setHorizontalGroup(
-            jpanelRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jRoom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jpanelRoomLayout.setVerticalGroup(
-            jpanelRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jRoom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-        );
-
-        jpanelGuest.setBackground(new java.awt.Color(0, 153, 153));
-
         jGuest.setBackground(new java.awt.Color(255, 255, 255));
         jGuest.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jGuest.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jGuest.setForeground(new java.awt.Color(255, 255, 255));
+        jGuest.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jGuest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/baseline_done_all_white_18dp.png"))); // NOI18N
         jGuest.setText("Quản Lí Khách Hàng");
-        jGuest.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jGuest.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jGuest.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jGuestMouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout jpanelGuestLayout = new javax.swing.GroupLayout(jpanelGuest);
-        jpanelGuest.setLayout(jpanelGuestLayout);
-        jpanelGuestLayout.setHorizontalGroup(
-            jpanelGuestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jGuest, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jpanelGuestLayout.setVerticalGroup(
-            jpanelGuestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jGuest, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-        );
-
-        pnthanhtoanhoadon.setBackground(new java.awt.Color(0, 153, 153));
-
         JHoadon.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        JHoadon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JHoadon.setForeground(new java.awt.Color(255, 255, 255));
+        JHoadon.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        JHoadon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/baseline_done_all_white_18dp.png"))); // NOI18N
         JHoadon.setText("Thanh Toán Hóa Đơn");
+        JHoadon.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         JHoadon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 JHoadonMouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout pnthanhtoanhoadonLayout = new javax.swing.GroupLayout(pnthanhtoanhoadon);
-        pnthanhtoanhoadon.setLayout(pnthanhtoanhoadonLayout);
-        pnthanhtoanhoadonLayout.setHorizontalGroup(
-            pnthanhtoanhoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JHoadon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        pnthanhtoanhoadonLayout.setVerticalGroup(
-            pnthanhtoanhoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JHoadon, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-        );
-
-        jpanelQLNV.setBackground(new java.awt.Color(0, 153, 153));
-
         jUser.setBackground(new java.awt.Color(255, 255, 255));
         jUser.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jUser.setForeground(new java.awt.Color(255, 255, 255));
+        jUser.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/baseline_done_all_white_18dp.png"))); // NOI18N
         jUser.setText("Quản Lý Nhân Viên");
-        jUser.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jUser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jUserMousePressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jpanelQLNVLayout = new javax.swing.GroupLayout(jpanelQLNV);
-        jpanelQLNV.setLayout(jpanelQLNVLayout);
-        jpanelQLNVLayout.setHorizontalGroup(
-            jpanelQLNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jpanelQLNVLayout.setVerticalGroup(
-            jpanelQLNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-        );
+        jUser.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jhome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jpanelInfor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jpanelRoom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jpanelGuest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnthanhtoanhoadon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jpanelQLNV, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jInfor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jRoom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jGuest, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JHoadon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jhome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jpanelInfor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpanelRoom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpanelGuest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnthanhtoanhoadon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpanelQLNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jInfor, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jGuest, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(JHoadon, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jUser, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
+
+        jInfor.getAccessibleContext().setAccessibleDescription("");
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 0));
 
@@ -272,7 +281,7 @@ public class TrangChu extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 597, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -286,8 +295,8 @@ public class TrangChu extends javax.swing.JFrame {
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -298,7 +307,9 @@ public class TrangChu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -311,65 +322,15 @@ public class TrangChu extends javax.swing.JFrame {
         jPanel2.add(new Home());
         jPanel2.validate();
         jPanel2.repaint();
-        jUser.setForeground(Color.BLACK);
-        jInfor.setForeground(Color.BLACK);
-        jGuest.setForeground(Color.BLACK);
-        jRoom.setForeground(Color.BLACK);
-         JHoadon.setForeground(Color.BLACK);
-        jpanelQLNV.setBackground(new Color(0,153,153));
-        jpanelGuest.setBackground(new Color(0,153,153));
-        jpanelInfor.setBackground(new Color(0,153,153));
-        jpanelRoom.setBackground(new Color(0,153,153));
-        pnthanhtoanhoadon.setBackground(new Color(0,153,153));
+        jUser.setForeground(Color.WHITE);
+        jInfor.setForeground(Color.WHITE);
+        jGuest.setForeground(Color.WHITE);
+        jRoom.setForeground(Color.WHITE);
+         JHoadon.setForeground(Color.WHITE);
+        
     }//GEN-LAST:event_jhomeMouseClicked
 
     
-    private void jUserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jUserMousePressed
-        // TODO add your handling code here:
-        jPanel2.removeAll();
-        jPanel2.setLayout(new BorderLayout());
-        jPanel2.add(new QLNhanVien());
-        jPanel2.validate();
-        jPanel2.repaint();
-        jUser.setForeground(new Color(255, 255, 230));
-         jInfor.setForeground(Color.BLACK);
-        jGuest.setForeground(Color.BLACK);
-        jRoom.setForeground(Color.BLACK);
-         JHoadon.setForeground(Color.BLACK);
-        jpanelQLNV.setBackground(Color.LIGHT_GRAY);
-        jpanelGuest.setBackground(new Color(0,153,153));
-        jpanelInfor.setBackground(new Color(0,153,153));
-        jpanelRoom.setBackground(new Color(0,153,153));
-        pnthanhtoanhoadon.setBackground(new Color(0,153,153));
-    }//GEN-LAST:event_jUserMousePressed
-
-    private void jInforMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jInforMouseClicked
-        // TODO add your handling code here:
-        //Binding data textfield
-        UserDAL infouser = new UserDAL();
-        User s =new User();
-        s = infouser.SingleUser(isuser);
-        
-        jPanel2.removeAll();
-        jPanel2.setLayout(new BorderLayout());
-        jPanel2.add(new InforPanel(s));
-        jPanel2.validate();
-        jPanel2.repaint();
-        jInfor.setForeground(new Color(255, 255, 230));
-        jUser.setForeground(Color.BLACK);
-        jGuest.setForeground(Color.BLACK);
-        jRoom.setForeground(Color.BLACK);
-         JHoadon.setForeground(Color.BLACK);
-        jpanelInfor.setBackground(Color.LIGHT_GRAY);
-        jpanelGuest.setBackground(new Color(0,153,153));
-        jpanelQLNV.setBackground(new Color(0,153,153));
-        jpanelRoom.setBackground(new Color(0,153,153));
-        pnthanhtoanhoadon.setBackground(new Color(0,153,153));
-        
-        
-        
-    }//GEN-LAST:event_jInforMouseClicked
-
     private void jRoomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRoomMouseClicked
         // TODO add your handling code here:
         jPanel2.removeAll();
@@ -377,16 +338,12 @@ public class TrangChu extends javax.swing.JFrame {
         jPanel2.add(new RoomPanel());
         jPanel2.validate();
         jPanel2.repaint();
-        jRoom.setForeground(new Color(255, 255, 230));
-        jInfor.setForeground(Color.BLACK);
-        jGuest.setForeground(Color.BLACK);
-        jUser.setForeground(Color.BLACK);
-         JHoadon.setForeground(Color.BLACK);
-        jpanelRoom.setBackground(Color.LIGHT_GRAY);
-        jpanelGuest.setBackground(new Color(0,153,153));
-        jpanelInfor.setBackground(new Color(0,153,153));
-        jpanelQLNV.setBackground(new Color(0,153,153));
-        pnthanhtoanhoadon.setBackground(new Color(0,153,153));
+        jRoom.setForeground(new Color(255, 102, 102));
+        jInfor.setForeground(Color.WHITE);
+        jGuest.setForeground(Color.WHITE);
+        jUser.setForeground(Color.WHITE);
+         JHoadon.setForeground(Color.WHITE);
+       
     }//GEN-LAST:event_jRoomMouseClicked
 
     private void jGuestMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jGuestMouseClicked
@@ -396,16 +353,12 @@ public class TrangChu extends javax.swing.JFrame {
         jPanel2.add(new GuestPanel());
         jPanel2.validate();
         jPanel2.repaint();
-        jGuest.setForeground(new Color(255, 255, 230));
-        jInfor.setForeground(Color.BLACK);
-        jUser.setForeground(Color.BLACK);
-        jRoom.setForeground(Color.BLACK);
-        JHoadon.setForeground(Color.BLACK);
-        jpanelGuest.setBackground(Color.LIGHT_GRAY);
-        jpanelQLNV.setBackground(new Color(0,153,153));
-        jpanelInfor.setBackground(new Color(0,153,153));
-        jpanelRoom.setBackground(new Color(0,153,153));
-        pnthanhtoanhoadon.setBackground(new Color(0,153,153));
+        jGuest.setForeground(new Color(255, 102, 102));
+        jInfor.setForeground(Color.WHITE);
+        jUser.setForeground(Color.WHITE);
+        jRoom.setForeground(Color.WHITE);
+        JHoadon.setForeground(Color.WHITE);
+       
     }//GEN-LAST:event_jGuestMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -426,17 +379,34 @@ public class TrangChu extends javax.swing.JFrame {
         jPanel2.add(new BillPanel());
         jPanel2.validate();
         jPanel2.repaint();
-        JHoadon.setForeground(new Color(255, 255, 230));
-        jGuest.setForeground(Color.BLACK);
-        jInfor.setForeground(Color.BLACK);
-        jUser.setForeground(Color.BLACK);
-        jRoom.setForeground(Color.BLACK);
-        pnthanhtoanhoadon.setBackground(Color.LIGHT_GRAY);
-        jpanelQLNV.setBackground(new Color(0,153,153));
-        jpanelInfor.setBackground(new Color(0,153,153));
-        jpanelRoom.setBackground(new Color(0,153,153));
-        jpanelGuest.setBackground(new Color(0,153,153));
+        JHoadon.setForeground(new Color(255, 102, 102));
+        jGuest.setForeground(Color.WHITE);
+        jInfor.setForeground(Color.WHITE);
+        jUser.setForeground(Color.WHITE);
+        jRoom.setForeground(Color.WHITE);
+        
     }//GEN-LAST:event_JHoadonMouseClicked
+
+    private void jInforMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jInforMouseClicked
+        // TODO add your handling code here:
+        //Binding data textfield
+        UserDAL infouser = new UserDAL();
+        User s =new User();
+        s = infouser.SingleUser(isuser);
+
+        jPanel2.removeAll();
+        jPanel2.setLayout(new BorderLayout());
+        jPanel2.add(new InforPanel(s));
+        jPanel2.validate();
+        jPanel2.repaint();
+        jInfor.setForeground(new Color(255, 102, 102));
+        jUser.setForeground(Color.WHITE);
+        jGuest.setForeground(Color.WHITE);
+        jRoom.setForeground(Color.WHITE);
+        JHoadon.setForeground(Color.WHITE);
+        
+
+    }//GEN-LAST:event_jInforMouseClicked
 
     /**
      * @param args the command line arguments
@@ -485,11 +455,6 @@ public class TrangChu extends javax.swing.JFrame {
     private javax.swing.JLabel jRoom;
     private javax.swing.JLabel jUser;
     private javax.swing.JPanel jhome;
-    private javax.swing.JPanel jpanelGuest;
-    private javax.swing.JPanel jpanelInfor;
-    private javax.swing.JPanel jpanelQLNV;
-    private javax.swing.JPanel jpanelRoom;
-    private javax.swing.JPanel pnthanhtoanhoadon;
     // End of variables declaration//GEN-END:variables
 
     

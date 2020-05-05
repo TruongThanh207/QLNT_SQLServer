@@ -9,6 +9,8 @@ import Controller.GuestDAL;
 import Controller.RoomsDAL;
 import Model.Guest;
 import Model.Room;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.ComboBoxModel;
@@ -16,6 +18,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 
 /**
@@ -69,6 +72,7 @@ public class GuestPanel extends javax.swing.JPanel {
         btnadd = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         txtMaxGuest = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setEnabled(false);
@@ -126,9 +130,10 @@ public class GuestPanel extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Phòng");
 
-        btnadd.setBackground(new java.awt.Color(255, 255, 255));
+        btnadd.setBackground(new java.awt.Color(102, 0, 102));
         btnadd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnadd.setText("Add New");
+        btnadd.setForeground(new java.awt.Color(255, 255, 255));
+        btnadd.setText("Thêm Người");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -218,6 +223,10 @@ public class GuestPanel extends javax.swing.JPanel {
                 .addComponent(txtMaxGuest, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("QUẢN LÝ KHÁCH HÀNG");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -229,11 +238,14 @@ public class GuestPanel extends javax.swing.JPanel {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(33, Short.MAX_VALUE))
+            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -264,20 +276,25 @@ public class GuestPanel extends javax.swing.JPanel {
          model.setColumnIdentifiers(new Object[]{
             "ID", "TÊN", "SDT", "GIỚI TÍNH", "CMND", "NGÀY ĐĂNG KÍ", "MÃ PHÒNG"
         });
-          TableColumnModel columnModel = tbGuest.getColumnModel();
-          int count =0;
-         for(Guest s : listGuest){
-             String gender;
-             if(s.getSex()==1)
-             {
-                 gender = "Nam";
-             }
-             else
-             {
-                 gender = "Nữ";
-             }
-            model.addRow(new Object[]{s.getId(),s.getName(), s.getSdt(), gender, s.getCmnd(), s.getNgaydk(),s.getId_phong()}
-            );
+         //set background table
+        JTableHeader tableHeader = tbGuest.getTableHeader();
+        tableHeader.setBackground(new Color(102, 0, 102));
+        tableHeader.setForeground(Color.WHITE);
+        tableHeader.setPreferredSize(new Dimension(300, 30));
+        
+        TableColumnModel columnModel = tbGuest.getColumnModel();
+        int count =0;
+        for(Guest s : listGuest){
+            String gender;
+            if(s.getSex()==1)
+            {
+                gender = "Nam";
+            }
+            else
+            {
+                gender = "Nữ";
+            }
+          model.addRow(new Object[]{s.getId(),s.getName(), s.getSdt(), gender, s.getCmnd(), s.getNgaydk(),s.getId_phong()});
           DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
             renderer.setHorizontalAlignment(JLabel.CENTER);
             columnModel.getColumn(0).setCellRenderer(renderer);
@@ -309,6 +326,7 @@ public class GuestPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButton jRadioButton1;

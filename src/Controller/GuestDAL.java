@@ -95,5 +95,33 @@ public class GuestDAL {
         }
          return listbyid;
     }
+
+    public Guest GetByIDPhong(int id) {
+        Guest s = new Guest();
+        String sql = "SELECT * FROM guests where ID_PHONG='"+id+"'";
+        try
+        {
+            Statement st = da.getConn().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next())
+            {
+                s.setId(rs.getInt("id"));
+                s.setName(rs.getString("name"));
+                s.setSdt(rs.getString("SDT"));
+                s.setSex(rs.getInt("sex"));
+                s.setCmnd(rs.getString("cmnd"));
+                s.setNgaydk(rs.getDate("Ngay_DK"));
+                s.setId_phong(rs.getInt("id_phong"));
+                return s;
+            }
+            return null;
+           
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();  
+        }
+         return null;
+    }
    
 }

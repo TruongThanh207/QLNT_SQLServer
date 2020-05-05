@@ -6,7 +6,20 @@
 package View;
 
 import Controller.RoomsDAL;
+import Model.Guest;
+import Model.Room;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -14,14 +27,81 @@ import javax.swing.JOptionPane;
  */
 public class AddRoom extends javax.swing.JFrame {
 
+    private ArrayList<Room> list;
+    private ArrayList<Guest> listguest;
+    DefaultTableModel model;
     /**
      * Creates new form AddRoom
      */
-    public AddRoom() {
+    public AddRoom(JTable tbRooms) {
         initComponents();
         setVisible(true);
         setLocationRelativeTo(null);
+        LoadData(tbRooms);
+        
+        btnsave.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RoomsDAL us = new RoomsDAL();
+                if(txtPhong.getText().equals("")||txtGiaPhong.getText().equals(""))
+                {
+                    JOptionPane.showMessageDialog(AddRoom.this, "Please enter infor!");
+                }
+                else
+                {
+                    if(us.AddRoom(txtPhong.getText(), Integer.parseInt(txtGiaPhong.getText())))
+                    {
+                        JOptionPane.showMessageDialog(AddRoom.this, "Add Success!");
+                        LoadData(tbRooms);
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(AddRoom.this, "Exsist Room!");
+                    }
+                }
+            }  
+        });
     }
+    public void LoadData(JTable tbRooms)
+    {
+        RoomsDAL us = new RoomsDAL();
+        list = us.GetRoomAll();
+        model = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; //To change body of generated methods, choose Tools | Templates.
+            }
+        };
+            tbRooms.setModel(model);
+             model.setColumnIdentifiers(new Object[]{
+                "MÃ PHÒNG", "TÊN PHÒNG", "SỐ_NGƯỜI_HIỆN_CÓ", "GIÁ PHÒNG", "E1", "W1", 
+            });
+             //set background table
+            JTableHeader tableHeader = tbRooms.getTableHeader();
+            tableHeader.setBackground(new Color(102, 0, 102));
+            tableHeader.setForeground(Color.WHITE);
+            tableHeader.setPreferredSize(new Dimension(350, 30));
+
+            TableColumnModel columnModel = tbRooms.getColumnModel();
+               //set align center data table
+            for(Room s : list){
+                model.addRow(new Object[]{s.getId(), s.getTen(), s.getSonguoi(), 
+                                          s.getPrice(), s.getChisodien_old(), 
+                                          s.getChisonuoc_old()}
+                );
+              DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+                renderer.setHorizontalAlignment(JLabel.CENTER);
+                columnModel.getColumn(0).setCellRenderer(renderer);
+                columnModel.getColumn(1).setCellRenderer(renderer);
+                columnModel.getColumn(2).setCellRenderer(renderer);
+                columnModel.getColumn(2).setPreferredWidth(120);
+                columnModel.getColumn(3).setCellRenderer(renderer);
+                columnModel.getColumn(4).setCellRenderer(renderer);
+                columnModel.getColumn(5).setCellRenderer(renderer);
+            }    
+               
+            
+    }            
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,14 +132,10 @@ public class AddRoom extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Giá Phòng");
 
-        btnsave.setBackground(new java.awt.Color(255, 255, 255));
+        btnsave.setBackground(new java.awt.Color(102, 0, 102));
         btnsave.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnsave.setForeground(new java.awt.Color(255, 255, 255));
         btnsave.setText("Save");
-        btnsave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnsaveActionPerformed(evt);
-            }
-        });
 
         txtGiaPhong.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtGiaPhong.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -69,6 +145,7 @@ public class AddRoom extends javax.swing.JFrame {
 
         btnclose.setBackground(new java.awt.Color(255, 0, 0));
         btnclose.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnclose.setForeground(new java.awt.Color(255, 255, 255));
         btnclose.setText("Close");
         btnclose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,7 +173,7 @@ public class AddRoom extends javax.swing.JFrame {
                         .addComponent(btnsave)
                         .addGap(54, 54, 54)
                         .addComponent(btnclose)))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,7 +186,7 @@ public class AddRoom extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtGiaPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnsave, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                     .addComponent(btnclose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -120,17 +197,11 @@ public class AddRoom extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -139,26 +210,6 @@ public class AddRoom extends javax.swing.JFrame {
     private void btncloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncloseActionPerformed
           this.setVisible(false);
     }//GEN-LAST:event_btncloseActionPerformed
-
-    private void btnsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsaveActionPerformed
-        RoomsDAL us = new RoomsDAL();
-        if(txtPhong.getText().equals("")||txtGiaPhong.getText().equals(""))
-        {
-            JOptionPane.showMessageDialog(this, "Please enter infor!");
-        }
-        else
-        {
-            if(us.AddRoom(txtPhong.getText(), Integer.parseInt(txtGiaPhong.getText())))
-            {
-                JOptionPane.showMessageDialog(this, "Add Success!");
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(this, "Exsist Room!");
-            }
-        }
-        
-    }//GEN-LAST:event_btnsaveActionPerformed
 
     /**
      * @param args the command line arguments

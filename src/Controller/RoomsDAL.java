@@ -10,6 +10,7 @@ import Model.User;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -78,7 +79,7 @@ public class RoomsDAL {
         else{
             id = idroom+1;
         }
-        if(FindRoom(name))
+        if(FindRoom(name)>0)
         {
             return false;
         }
@@ -117,7 +118,7 @@ public class RoomsDAL {
         }
         return -1;
     }
-    public boolean FindRoom(String name)
+    public int FindRoom(String name)
     {
         String sql = "SELECT count(*) FROM rooms where TENPHONG='"+name+"'";
         try
@@ -126,12 +127,75 @@ public class RoomsDAL {
             ResultSet rs = st.executeQuery(sql);
             while(rs.next())
             {
-                return true;
+                return rs.getInt(1);
             }
         }
         catch(Exception e)
         {
             e.printStackTrace();  
+        }
+        return -1;
+    }
+
+    public ArrayList<Room> GetRoomAllNotEmpty() {
+        ArrayList<Room> list = new ArrayList<>();
+        String sql = "SELECT * FROM rooms where SO_NGUOI_HIEN_CO <> 0";
+        
+        try {
+            Statement st = da.getConn().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+                Room s = new Room();
+                s.setId(rs.getInt("id"));
+                s.setTen(rs.getString("tenphong"));
+                s.setSonguoi(rs.getInt("so_nguoi_hien_co"));
+                s.setPrice(rs.getInt("giaphong"));
+                s.setChisodien_old(rs.getInt("chisodien_old"));
+                s.setChisodien_new(rs.getInt("chisodien_new"));
+                s.setChisonuoc_old(rs.getInt("chisonuoc_old"));
+                s.setChisonuoc_new(rs.getInt("chisonuoc_new"));
+                list.add(s);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return list;
+    }
+
+    public Room GetRoomByID(int index) {
+        
+        String sql = "SELECT * FROM rooms where ID = '"+index+"'";
+        try {
+            Statement st = da.getConn().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+                Room s = new Room();
+                s.setId(rs.getInt("id"));
+                s.setTen(rs.getString("tenphong"));
+                s.setSonguoi(rs.getInt("so_nguoi_hien_co"));
+                s.setPrice(rs.getInt("giaphong"));
+                s.setChisodien_old(rs.getInt("chisodien_old"));
+                s.setChisodien_new(rs.getInt("chisodien_new"));
+                s.setChisonuoc_old(rs.getInt("chisonuoc_old"));
+                s.setChisonuoc_new(rs.getInt("chisonuoc_new"));
+                return s;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return null;
+    }
+
+    public boolean RemoveRoomByID(int id) {
+        String sql = "Delete rooms where id = '"+id+"'";
+        try {
+            Statement st = da.getConn().createStatement();
+            st.executeUpdate(sql);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }

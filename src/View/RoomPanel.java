@@ -11,11 +11,15 @@ import Controller.UserDAL;
 import Model.Guest;
 import Model.Room;
 import Model.User;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
@@ -33,12 +37,17 @@ public class RoomPanel extends javax.swing.JPanel {
      */
     public RoomPanel() {
         initComponents();
+       
+        setVisible(true);
+        LoadData();
+        //disable edit table
+       
+    }
+    public void LoadData()
+    {
         RoomsDAL us = new RoomsDAL();
         list = us.GetRoomAll();
-        setVisible(true);
-        
-        //disable edit table
-       model = new DefaultTableModel(){
+        model = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; //To change body of generated methods, choose Tools | Templates.
@@ -49,9 +58,15 @@ public class RoomPanel extends javax.swing.JPanel {
          model.setColumnIdentifiers(new Object[]{
             "MÃ PHÒNG", "TÊN PHÒNG", "SỐ_NGƯỜI_HIỆN_CÓ", "GIÁ PHÒNG", "E1", "W1", 
         });
-         TableColumnModel columnModel = tbRooms.getColumnModel();
+         //set background table
+        JTableHeader tableHeader = tbRooms.getTableHeader();
+        tableHeader.setBackground(new Color(102, 0, 102));
+        tableHeader.setForeground(Color.WHITE);
+        tableHeader.setPreferredSize(new Dimension(350, 30));
+        
+        TableColumnModel columnModel = tbRooms.getColumnModel();
            //set align center data table
-         for(Room s : list){
+        for(Room s : list){
             model.addRow(new Object[]{s.getId(), s.getTen(), s.getSonguoi(), 
                                       s.getPrice(), s.getChisodien_old(), 
                                       s.getChisonuoc_old()}
@@ -61,6 +76,7 @@ public class RoomPanel extends javax.swing.JPanel {
             columnModel.getColumn(0).setCellRenderer(renderer);
             columnModel.getColumn(1).setCellRenderer(renderer);
             columnModel.getColumn(2).setCellRenderer(renderer);
+            columnModel.getColumn(2).setPreferredWidth(120);
             columnModel.getColumn(3).setCellRenderer(renderer);
             columnModel.getColumn(4).setCellRenderer(renderer);
             columnModel.getColumn(5).setCellRenderer(renderer);
@@ -79,7 +95,7 @@ public class RoomPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbRooms = new javax.swing.JTable();
         btnsave = new javax.swing.JButton();
-        btnrelease = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
         txtnameroom = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -127,12 +143,23 @@ public class RoomPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tbRooms);
 
-        btnsave.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnsave.setText("Save");
+        btnsave.setBackground(new java.awt.Color(102, 0, 102));
+        btnsave.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnsave.setForeground(new java.awt.Color(255, 255, 255));
+        btnsave.setText("Lưu");
         btnsave.setEnabled(false);
+        btnsave.setPreferredSize(new java.awt.Dimension(53, 35));
 
-        btnrelease.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnrelease.setText("Release");
+        btnXoa.setBackground(new java.awt.Color(102, 0, 102));
+        btnXoa.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnXoa.setForeground(new java.awt.Color(255, 255, 255));
+        btnXoa.setText("Xóa");
+        btnXoa.setEnabled(false);
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         txtnameroom.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtnameroom.setEnabled(false);
@@ -146,16 +173,22 @@ public class RoomPanel extends javax.swing.JPanel {
         txtngdaidien.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtngdaidien.setEnabled(false);
 
-        btnedit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnedit.setText("Edit");
+        btnedit.setBackground(new java.awt.Color(102, 0, 102));
+        btnedit.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnedit.setForeground(new java.awt.Color(255, 255, 255));
+        btnedit.setText("Sửa");
+        btnedit.setPreferredSize(new java.awt.Dimension(53, 235));
         btnedit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btneditActionPerformed(evt);
             }
         });
 
-        btnadd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnadd.setText("Add New");
+        btnadd.setBackground(new java.awt.Color(102, 0, 102));
+        btnadd.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnadd.setForeground(new java.awt.Color(255, 255, 255));
+        btnadd.setText("Thêm");
+        btnadd.setPreferredSize(new java.awt.Dimension(65, 35));
         btnadd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnaddActionPerformed(evt);
@@ -168,7 +201,7 @@ public class RoomPanel extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Giá Phòng");
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("THÔNG TIN PHÒNG");
 
@@ -305,40 +338,41 @@ public class RoomPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
+                .addContainerGap(56, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnadd)
-                        .addGap(32, 32, 32)
-                        .addComponent(btnrelease))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtnameroom, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(63, 63, 63))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel2)
-                                            .addGap(18, 18, 18))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addGap(57, 57, 57)
-                                            .addComponent(jLabel3)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtpriceroom, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(btnedit)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(btnsave))
-                                            .addComponent(txtngdaidien, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtnameroom, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(63, 63, 63))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGap(57, 57, 57)
+                                        .addComponent(jLabel3)
+                                        .addGap(23, 23, 23)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtpriceroom, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtngdaidien, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnsave, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(288, 288, 288)
+                                .addComponent(btnadd, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)))
+                        .addGap(8, 8, 8)))
                 .addGap(26, 26, 26))
         );
         layout.setVerticalGroup(
@@ -365,13 +399,15 @@ public class RoomPanel extends javax.swing.JPanel {
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnedit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnrelease, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnadd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnsave, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnsave, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnadd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(67, 67, 67))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -380,6 +416,7 @@ public class RoomPanel extends javax.swing.JPanel {
         txtkh1.setText("");
         txtkh2.setText("");
         txtkh3.setText("");
+        btnXoa.setEnabled(true);
         int click = tbRooms.getSelectedRow();
         TableModel model=tbRooms.getModel();
         //get people on room by id
@@ -427,20 +464,32 @@ public class RoomPanel extends javax.swing.JPanel {
         {
             txtnameroom.setEnabled(true);
             txtpriceroom.setEnabled(true);
-            btnedit.setText("Cancel");
+            btnedit.setText("Hủy");
             btnsave.setEnabled(true);
         }
     }//GEN-LAST:event_btneditActionPerformed
 
     private void btnaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddActionPerformed
-        new AddRoom();
+        new AddRoom(tbRooms);
     }//GEN-LAST:event_btnaddActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+        RoomsDAL us = new RoomsDAL();
+        int click = tbRooms.getSelectedRow();
+        int id = Integer.parseInt(tbRooms.getValueAt(click, 0).toString());
+        if(us.RemoveRoomByID(id))
+        {
+            JOptionPane.showMessageDialog(this, "Xóa Thành Công!");
+            LoadData();
+        }
+    }//GEN-LAST:event_btnXoaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnXoa;
     private javax.swing.JButton btnadd;
     private javax.swing.JButton btnedit;
-    private javax.swing.JButton btnrelease;
     private javax.swing.JButton btnsave;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
